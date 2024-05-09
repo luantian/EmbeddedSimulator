@@ -1,0 +1,20 @@
+D:\Work Files 2024\3.Support Files\Embedded Simulator\EmbeddedSimulator\bin\Debug\EmbeddedSimulator.exe.config
+D:\Work Files 2024\3.Support Files\Embedded Simulator\EmbeddedSimulator\bin\Debug\EmbeddedSimulator.exe
+D:\Work Files 2024\3.Support Files\Embedded Simulator\EmbeddedSimulator\bin\Debug\EmbeddedSimulator.pdb
+D:\Work Files 2024\3.Support Files\Embedded Simulator\EmbeddedSimulator\obj\Debug\EmbeddedSimulator.csproj.AssemblyReference.cache
+D:\Work Files 2024\3.Support Files\Embedded Simulator\EmbeddedSimulator\obj\Debug\EmbeddedSimulator.Form1.resources
+D:\Work Files 2024\3.Support Files\Embedded Simulator\EmbeddedSimulator\obj\Debug\EmbeddedSimulator.Properties.Resources.resources
+D:\Work Files 2024\3.Support Files\Embedded Simulator\EmbeddedSimulator\obj\Debug\EmbeddedSimulator.csproj.GenerateResource.cache
+D:\Work Files 2024\3.Support Files\Embedded Simulator\EmbeddedSimulator\obj\Debug\EmbeddedSimulator.csproj.CoreCompileInputs.cache
+D:\Work Files 2024\3.Support Files\Embedded Simulator\EmbeddedSimulator\obj\Debug\EmbeddedSimulator.exe
+D:\Work Files 2024\3.Support Files\Embedded Simulator\EmbeddedSimulator\obj\Debug\EmbeddedSimulator.pdb
+D:\workspace\cechuang\Embedded Simulator\EmbeddedSimulator\obj\Debug\EmbeddedSimulator.csproj.AssemblyReference.cache
+D:\workspace\cechuang\Embedded Simulator\EmbeddedSimulator\obj\Debug\EmbeddedSimulator.Form1.resources
+D:\workspace\cechuang\Embedded Simulator\EmbeddedSimulator\obj\Debug\EmbeddedSimulator.Properties.Resources.resources
+D:\workspace\cechuang\Embedded Simulator\EmbeddedSimulator\obj\Debug\EmbeddedSimulator.csproj.GenerateResource.cache
+D:\workspace\cechuang\Embedded Simulator\EmbeddedSimulator\obj\Debug\EmbeddedSimulator.csproj.CoreCompileInputs.cache
+D:\workspace\cechuang\Embedded Simulator\EmbeddedSimulator\obj\Debug\EmbeddedSimulator.exe
+D:\workspace\cechuang\Embedded Simulator\EmbeddedSimulator\obj\Debug\EmbeddedSimulator.pdb
+D:\workspace\cechuang\Embedded Simulator\EmbeddedSimulator\bin\Debug\EmbeddedSimulator.exe.config
+D:\workspace\cechuang\Embedded Simulator\EmbeddedSimulator\bin\Debug\EmbeddedSimulator.exe
+D:\workspace\cechuang\Embedded Simulator\EmbeddedSimulator\bin\Debug\EmbeddedSimulator.pdb
