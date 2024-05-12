@@ -240,8 +240,8 @@ namespace EmbeddedSimulator
                     keyboard.Output();
                     break;
                 case "测量":
-                    keyboard.SelfPage00();
-                    //keyboard.Test();
+                    //keyboard.SelfPage00();
+                    keyboard.Test();
                     // keyboard.Input();
                     break;
                 default:
@@ -329,7 +329,7 @@ namespace EmbeddedSimulator
 
         // 自检页面 六条自检通道变量地址 1001 - 1006
         static string SelfPage00PageAddress = "1001";
-        
+
         // 输出
         static string InputAddress = "6000";  // 当前测量值 变量地址
         static string InputUnitAddress = "2001"; // 当前测量值 单位 变量地址
@@ -348,14 +348,16 @@ namespace EmbeddedSimulator
         static string VoltageInputModeAddress = "2032";  // 电压模式 变量地址
         static string ElectricCurrentInputModeAddress = "2033";  // 电流模式 变量地址
         static string ResistanceOutModeAddress = "3030";  // 电阻模式 变量地址
-        static string PotentiometerOutModeAddress = "3031";  // 电阻模式 变量地址
+        static string PotentiometerOutModeAddress = "3031";  // 电位差计模式 变量地址
+
+        List<string> OverviewAddressList = new List<string> { ResistanceInputModeAddress, PotentiometerInputModeAddress, VoltageInputModeAddress, ElectricCurrentInputModeAddress, ResistanceOutModeAddress, PotentiometerOutModeAddress };
 
         static string ResistanceInputActiveModeAddress = "2130";  // 电阻模式 选中状态 变量地址
         static string PotentiometerInputActiveModeAddress = "2131";  // 电位差计模式 选中状态 变量地址
         static string VoltageInputActiveModeAddress = "2132";  // 电压模式 选中状态 变量地址
         static string ElectricCurrentInputActiveModeAddress = "2133";  // 电流模式 选中状态 变量地址
         static string ResistanceOutActiveModeAddress = "2134";  // 电阻模式 选中状态 变量地址
-        static string PotentiometerOutActiveModeAddress = "2135";  // 电阻模式 选中状态 变量地址
+        static string PotentiometerOutActiveModeAddress = "2135";  // 电位差计模式 选中状态 变量地址
         static string SelfTestRouterAddress = "2136"; // 自检状态 选中状态 变量地址
 
         static string ResistanceInputModeOverviewAddress = "6100";  // 电阻模式 变量地址
@@ -363,7 +365,7 @@ namespace EmbeddedSimulator
         static string VoltageInputModeOverviewAddress = "6300";  // 电压模式 变量地址
         static string ElectricCurrentInputModeOverviewAddress = "6400";  // 电流模式 变量地址
         static string ResistanceOutModeOverviewAddress = "8100";  // 电阻模式 变量地址
-        static string PotentiometerOutModeOverviewAddress = "8200";  // 电阻模式 变量地址
+        static string PotentiometerOutModeOverviewAddress = "8200";  // 电位差计模式 变量地址
 
         static string SelfTest01PageAddress = "4020"; // 4021
 
@@ -646,11 +648,17 @@ namespace EmbeddedSimulator
 
         public void Cancel()
         {
-            if (CurrentStatus == Status.Setting)
+            switch(CurrentStatus)
             {
-                Clear();
-                Num = OldNum;
-                SendOutputNum(OldNum);
+                case Status.Setting:
+                    Clear();
+                    Num = OldNum;
+                    SendOutputNum(OldNum);
+                    break;
+                case Status.Cutover:
+                    // 关闭 当前 开启的通道
+                    CloseChannel(ChannelIndex);
+                    break;
             }
             CurrentStatus = Status.Init;
         }
@@ -830,6 +838,12 @@ namespace EmbeddedSimulator
             SendChangeVarIcon(portData2);
         }
 
+        private void CloseChannel(int ChannelIndex)
+        {
+            PortData portData = new PortData { Address = OverviewAddressList[ChannelIndex], Value = "0000" };
+            SendChangeVarIcon(portData);
+        }
+
         private void Clear() {
             if (CurrentStatus != Status.Setting)
             {
@@ -850,25 +864,29 @@ namespace EmbeddedSimulator
             {
                 SendInputNum(result.ToString());
                 await Task.Delay(Delay);
-                SetChannelOverviewAddress(new PortData { Address = ChannelOverviewAddress[ChannelIndex], Value = result.ToString() });
+                SetChannelOverviewAddress(new PortData { Address = ChannelOverviewAddress[ChannelIndex], Value = result.ToString()});
             }
             else if (ChannelIndex >= 4 && ChannelIndex < 6)
             {
-                //SendOutputNum(result.ToString());
+                SendOutputNum(result.ToString());
+                await Task.Delay(Delay);
+                SetChannelOverviewAddress(new PortData { Address = ChannelOverviewAddress[ChannelIndex], Value = result.ToString() });
             }
-            
         }
 
+        // 00 页 自检
         public void SelfPage00() {
             string direct = "0001 0001 0001 0001 0001 0001";
             PortData portData2 = new PortData { Address = SelfPage00PageAddress, Value = direct };
             SendChangeVarIcon(portData2);
         }
 
+        // 01页 自检 修改指令
+
         public void SelfPage01()
         {
             string direct = "0001 0001";
-            PortData portData2 = new PortData { Address = SelfTest01PageAddress, Value = direct }; 
+            PortData portData2 = new PortData { Address = SelfTest01PageAddress, Value = direct };
             SendChangeVarIcon(portData2);
         }
     }
